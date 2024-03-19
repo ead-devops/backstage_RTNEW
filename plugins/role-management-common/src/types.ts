@@ -1,6 +1,6 @@
 import { DiscoveryApi, IdentityApi } from '@backstage/core-plugin-api';
 import { Entity } from '@backstage/catalog-model';
-
+import { UserEntityData } from '../../custom-user-db-backend/src/service/user-data-helper';
 /***/
 /**
  * Common functionalities for the role-management plugin.
@@ -83,6 +83,16 @@ export type UserRole = {
   roles: string[]
 }
 
+export type UserEntityData = {
+  username?: string;
+  password?: string;
+  email?: string;
+}
+
+export type UserEntityStatus = {
+  status: string;
+};
+
 export interface RoleMappingApi {
 
   getRoles(): Promise<RoleManagementData[]>;
@@ -93,6 +103,9 @@ export interface RoleMappingApi {
   createUserRole(data: UserRole): Promise<RoleMappingApiStatus>;
 
   getUserPermission(name: string): Promise<RoleManagementData>;
+
+  getUsers(data: UserEntityData): Promise<UserEntityData[]>;
+  insertuser(data: UserEntityData): Promise<UserEntityStatus>;
 
   // getImportEntity(filter: ImportEntityFilter): Promise<ImportEntityData[]>;
   // createImportEntity(data: ImportEntityData): Promise<ImportEntityMappingApiStatus>;

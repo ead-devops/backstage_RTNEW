@@ -35,6 +35,7 @@ import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
 
 import { ArtifactoryUrlReader } from "@internal/backstage-plugin-artifactory-integration-backend";
 import { SvnUrlReader } from "@internal/backstage-plugin-svn-integration-backend";
+import 'global-agent/bootstrap';
 
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();

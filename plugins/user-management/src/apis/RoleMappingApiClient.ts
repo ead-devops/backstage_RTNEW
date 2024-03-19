@@ -4,6 +4,8 @@ import {
     RoleManagementData, 
     RoleMappingApi, 
     RoleMappingApiStatus,
+    UserEntityData,
+    UserEntityStatus,
     UserRole, 
 } from "@internal/backstage-plugin-role-management-common"
 import { ApiBase } from './ApiBase';
@@ -13,6 +15,31 @@ export const roleMappingApiRef = createApiRef<RoleMappingApi>({
 });
 
 export class RoleMappingApiClient extends ApiBase implements RoleMappingApi {
+
+    async getUsers(data: UserEntityData): Promise<UserEntityData[]> {
+
+        const info = await this.getUrlAndToken("user-data");
+        const query = new URLSearchParams();
+
+        const res = await fetch(`${info.baseUrl}?${query}`, this.getGetHeader(info.token));
+        if (!res.ok) {
+            throw await ResponseError.fromResponse(res);
+        }
+
+        return await res.json() as UserEntityData[];
+    }
+
+    async insertuser(data: UserEntityData): Promise<UserEntityStatus> {
+        const info = await this.getUrlAndToken("user-data");
+        const query = new URLSearchParams();
+
+        const res = await fetch(`${info.baseUrl}?${query}`, this.getPostHeader(info.token, data));
+        if (!res.ok) {
+            throw await ResponseError.fromResponse(res);
+        }
+        
+        return await res.json() as UserEntityStatus;
+    }
 
     async getRoles(): Promise<RoleManagementData[]> {
 

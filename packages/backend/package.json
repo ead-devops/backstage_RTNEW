@@ -46,6 +46,7 @@
     "@internal/backstage-plugin-custom-user-login-backend": "^0.1.0",
     "@internal/backstage-plugin-role-management-backend": "^0.1.0",
     "@internal/backstage-plugin-svn-integration-backend": "^0.1.0",
+    "global-agent": "^3.0.0",
     "app": "link:../app",
     "better-sqlite3": "^9.0.0",
     "dockerode": "^3.3.1",
